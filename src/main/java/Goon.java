@@ -21,38 +21,38 @@ public class Goon {
                 "____________________________________________________________\n");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        ArrayList<String> listInputs = new ArrayList<String>();
+        ArrayList<Task> listInputs = new ArrayList<Task>();
         int counter = 1;
 
         while (!input.equals("bye")) {
             if(input.equals("list")) {
                 System.out.println("\t____________________________________________________________\n" +
                         "Here are the tasks in your list:");
-                for(String s : listInputs){
-                    System.out.println("\t" + s);
+                int printCounter = 1;
+                for(Task t : listInputs){
+                    System.out.println("\t"+ printCounter + "." + t);
+                    printCounter++;
                 }
                 System.out.println("\t____________________________________________________________\n");
             } else if(input.length() > 5 && input.startsWith("mark")){
                 int mark = input.charAt(5) - '0';
                 System.out.println("\t____________________________________________________________\n" +
                         "Nice! I've marked this task as done:");
-                String stringToMark = listInputs.get(mark-1);
-                stringToMark = stringToMark.substring(0,3) + "x" + stringToMark.substring(4);
-                listInputs.set(mark-1, stringToMark);
-                System.out.println("\t"+ listInputs.get(mark-1).substring(2));
+                Task taskToMark = listInputs.get(mark-1);
+                listInputs.set(mark-1, taskToMark.markAsDone());
+                System.out.println("\t"+ taskToMark.toString());
                 System.out.println("\t____________________________________________________________\n");
             } else if (input.length() > 7 && input.startsWith("unmark")) {
                 int mark = input.charAt(7) - '0';
                 System.out.println("\t____________________________________________________________\n" +
                         "OK, I've marked this task as not done yet:");
-                String stringToMark = listInputs.get(mark-1);
-                stringToMark = stringToMark.substring(0,3) + " " + stringToMark.substring(4);
-                listInputs.set(mark-1, stringToMark);
-                System.out.println("\t"+ listInputs.get(mark-1).substring(2));
+                Task taskToMark = listInputs.get(mark-1);
+                listInputs.set(mark-1, taskToMark.unmarkAsDone());
+                System.out.println("\t"+ taskToMark.toString());
                 System.out.println("\t____________________________________________________________\n");
             } else {
                 formattedPrint("added: "+ input);
-                listInputs.add(counter + ".[ ] " + input);
+                listInputs.add(new Task(input));
                 counter++;
             }
             input = scanner.nextLine();
