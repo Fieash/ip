@@ -32,7 +32,7 @@ public class Goon {
                     System.out.println("\t" + s);
                 }
                 System.out.println("\t____________________________________________________________\n");
-            } else if(input.length() > 4 && input.substring(0, 4).equals("mark")){
+            } else if(input.length() > 5 && input.startsWith("mark")){
                 int mark = input.charAt(5) - '0';
                 System.out.println("\t____________________________________________________________\n" +
                         "Nice! I've marked this task as done:");
@@ -41,7 +41,16 @@ public class Goon {
                 listInputs.set(mark-1, stringToMark);
                 System.out.println("\t"+ listInputs.get(mark-1).substring(2));
                 System.out.println("\t____________________________________________________________\n");
-            }else {
+            } else if (input.length() > 7 && input.startsWith("unmark")) {
+                int mark = input.charAt(7) - '0';
+                System.out.println("\t____________________________________________________________\n" +
+                        "OK, I've marked this task as not done yet:");
+                String stringToMark = listInputs.get(mark-1);
+                stringToMark = stringToMark.substring(0,3) + " " + stringToMark.substring(4);
+                listInputs.set(mark-1, stringToMark);
+                System.out.println("\t"+ listInputs.get(mark-1).substring(2));
+                System.out.println("\t____________________________________________________________\n");
+            } else {
                 formattedPrint("added: "+ input);
                 listInputs.add(counter + ".[ ] " + input);
                 counter++;
