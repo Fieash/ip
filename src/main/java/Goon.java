@@ -27,6 +27,22 @@ public class Goon {
         printDivider("");
     }
 
+    public static boolean markCheck(int actual, int minimum, String taskType) {
+        if (actual < minimum) {
+            formattedPrint("Gooner, " + taskType + "ing of a task needs a number, have you attended primary school? idiot.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean descriptionCheck(int actual, int minimum, String taskType) {
+        if (actual < minimum) {
+            formattedPrint("Gooner, description of a " + taskType + " needs to have something how else would you identify the damn task???????");
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(
                 "  ________                    __________        __   \n" +
@@ -40,61 +56,87 @@ public class Goon {
                 " How may I increase your levels of goon today?\n" +
                 "____________________________________________________________\n");
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+//        String input = scanner.nextLine();
+
         ArrayList<Task> listInputs = new ArrayList<Task>();
         int counter = 1;
 
-        while (!input.equals("bye")) {
-            if(input.equals("list")) {
-                printDivider("\tHere are the tasks in your list:");
-                int printCounter = 1;
-                for(Task t : listInputs){
-                    System.out.println("\t"+ printCounter + "." + t);
-                    printCounter++;
+        try {
+            while (true) {
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("bye")){
+                    formattedPrint("Bye. Hope to see you again soon!");
+                    System.exit(0);
                 }
-                printDivider("");
+                else if (input.equals("list")) {
+                    printDivider("\tHere are the tasks in your list:");
+                    int printCounter = 1;
+                    for (Task t : listInputs) {
+                        System.out.println("\t" + printCounter + "." + t);
+                        printCounter++;
+                    }
+                    printDivider("");
 
-            } else if(input.length() > 5 && input.startsWith("mark")){ //marking tasks
-                int mark = input.charAt(5) - '0';
-                printDivider("\tNice! I've marked this task as done:");
-                Task taskToMark = listInputs.get(mark-1);
-                listInputs.set(mark-1, taskToMark.markAsDone());
-                System.out.println("\t"+ taskToMark.toString());
-                printDivider("");
+                } else if (input.startsWith("mark")) { //marking tasks
+                    if(!markCheck(input.length(), 5, "mark")) {
+                        continue;
+                    }
+                    int mark = input.charAt(5) - '0';
+                    printDivider("\tNice! I've marked this task as done:");
+                    Task taskToMark = listInputs.get(mark - 1);
+                    listInputs.set(mark - 1, taskToMark.markAsDone());
+                    System.out.println("\t" + taskToMark.toString());
+                    printDivider("");
 
-            } else if (input.length() > 7 && input.startsWith("unmark")) { //unmarking tasks
-                int mark = input.charAt(7) - '0';
-                printDivider("\tOK, I've marked this task as not done yet:");
-                Task taskToMark = listInputs.get(mark-1);
-                listInputs.set(mark-1, taskToMark.unmarkAsDone());
-                System.out.println("\t"+ taskToMark.toString());
-                printDivider("");
+                } else if (input.startsWith("unmark")) { //unmarking tasks
+                    if(!markCheck(input.length(), 6, "mark")) {
+                        continue;
+                    }
+                    int unmark = input.charAt(7) - '0';
+                    printDivider("\tOK, I've marked this task as not done yet:");
+                    Task taskToUnmark = listInputs.get(unmark - 1);
+                    listInputs.set(unmark - 1, taskToUnmark.unmarkAsDone());
+                    System.out.println("\t" + taskToUnmark.toString());
+                    printDivider("");
 
-            } else if(input.length() > 5 && input.startsWith("todo")) { //adding "ToDo" task
-                ToDo newTodo = new ToDo(input.substring(5));
-                addTask(newTodo, listInputs);
+                } else if (input.startsWith("todo")) { //adding "ToDo" task
+                    if(!descriptionCheck(input.length(),6, "ToDo")){
+                        continue;
+                    }
+                    ToDo newTodo = new ToDo(input.substring(5));
+                    addTask(newTodo, listInputs);
 
-            } else if(input.length() > 6 && input.startsWith("event")) { //adding event
-                String desc = input.split("/from")[0].substring(6);
-                String from = input.split("/from")[1].split("/to")[0];
-                String to = input.split("/to")[1];
-                Event newEvent = new Event(desc, from, to);
-                addTask(newEvent, listInputs);
+                } else if (input.startsWith("event")) { //adding event
+                    if(!descriptionCheck(input.length(),7, "Event")){
+                        continue;
+                    }
+                    String desc = input.split("/from")[0].substring(6);
+                    String from = input.split("/from")[1].split("/to")[0];
+                    String to = input.split("/to")[1];
+                    Event newEvent = new Event(desc, from, to);
+                    addTask(newEvent, listInputs);
 
-            } else if (input.length() > 9 && input.startsWith("deadline")) { //adding deadline
-                String desc = input.split("/by")[0].substring(9);
-                String by = input.split("/by")[1];
-                Deadline newDead = new Deadline(desc, by);
-                addTask(newDead, listInputs);
-            }else {
-                formattedPrint("added: "+ input);
-                listInputs.add(new Task(input));
-                counter++;
+                } else if (input.length() > 9 && input.startsWith("deadline")) { //adding deadline
+                    if(!descriptionCheck(input.length(),11, "Deadline")){
+                        continue;
+                    }
+                    String desc = input.split("/by")[0].substring(9);
+                    String by = input.split("/by")[1];
+                    Deadline newDead = new Deadline(desc, by);
+                    addTask(newDead, listInputs);
+                } else {
+//                formattedPrint("added: "+ input);
+//                listInputs.add(new Task(input));
+//                counter++;
+                    System.out.println("Gooner, you better wake up and enter a valid command >:-(");
+                }
+//                input = scanner.nextLine();
             }
-            input = scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Uh oh this catchall shouldn't happen :(" + e.getMessage());
         }
 
-        formattedPrint("Bye. Hope to see you again soon!");
+
     }
 
 }
