@@ -22,8 +22,16 @@ public class Goon {
     public static void addTask(Task newTask, ArrayList<Task> listInputs) {
         printDivider("\tGot it. I've added this task:\n\t\t" + newTask.toString());
         listInputs.add(newTask);
-        int taskCount = countTasks(listInputs);
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+        System.out.println("\tNow you have " + countTasks(listInputs) + " tasks in the list.");
+        printDivider("");
+    }
+
+    public static void deleteTask(int taskIndex, ArrayList<Task> listInputs) {
+        printDivider("\tNoted. I've removed this task:");
+        Task taskToDelete = listInputs.get(taskIndex - 1);
+        listInputs.remove(taskIndex - 1);
+        System.out.println("\t" + taskToDelete.toString());
+        System.out.println("\tNow you have " + countTasks(listInputs) + " tasks in the list.");
         printDivider("");
     }
 
@@ -116,7 +124,7 @@ public class Goon {
                     Event newEvent = new Event(desc, from, to);
                     addTask(newEvent, listInputs);
 
-                } else if (input.length() > 9 && input.startsWith("deadline")) { //adding deadline
+                } else if (input.startsWith("deadline")) { //adding deadline
                     if(!descriptionCheck(input.length(),11, "Deadline")){
                         continue;
                     }
@@ -124,6 +132,11 @@ public class Goon {
                     String by = input.split("/by")[1];
                     Deadline newDead = new Deadline(desc, by);
                     addTask(newDead, listInputs);
+                } else if (input.startsWith("delete")) {
+                    if(!markCheck(input.length(),8, "Delete")){ continue; }
+                    int deleteIndex = input.charAt(7) - '0';
+                    deleteTask(deleteIndex, listInputs);
+
                 } else {
 //                formattedPrint("added: "+ input);
 //                listInputs.add(new Task(input));
@@ -132,11 +145,12 @@ public class Goon {
                 }
 //                input = scanner.nextLine();
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Gooner, enter something within bounds idiot.");
         } catch (Exception e) {
             System.out.println("Uh oh this catchall shouldn't happen :(" + e.getMessage());
         }
 
 
     }
-
 }
