@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class GoonException extends Exception {
+    public GoonException() {}
 
-public class GoonException {
+    public GoonException(String message) {
+        super(message);
+    }
 }
