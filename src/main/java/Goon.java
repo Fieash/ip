@@ -1,5 +1,9 @@
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Goon {
     public static void formattedPrint(String input) {
@@ -24,6 +28,16 @@ public class Goon {
         listInputs.add(newTask);
         System.out.println("\tNow you have " + countTasks(listInputs) + " tasks in the list.");
         printDivider("");
+    }
+
+    public static void addTaskToFile(Task newTask) {
+        try {
+            FileWriter fw = new FileWriter("data/tasks.txt", true);
+            fw.append(newTask.toFileFormat());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("G00n3r, an error occured while writing to the file.");
+        }
     }
 
     public static void deleteTask(int taskIndex, ArrayList<Task> listInputs) {
@@ -51,6 +65,10 @@ public class Goon {
         return true;
     }
 
+    public static void parseSavedTasks(ArrayList<Task> listInputs) {
+        //todo
+    }
+
     public static void main(String[] args) {
         System.out.println(
                 "  ________                    __________        __   \n" +
@@ -63,11 +81,54 @@ public class Goon {
                 " Good morning Gooner, this is GoonBot\n" +
                 " How may I increase your levels of goon today?\n" +
                 "____________________________________________________________\n");
-        Scanner scanner = new Scanner(System.in);
-//        String input = scanner.nextLine();
 
+        // init the array
         ArrayList<Task> listInputs = new ArrayList<Task>();
         int counter = 1;
+
+        // attempt to read file
+        try {
+            File savedTasks = new File("data/tasks.txt");
+            Scanner readTasks = new Scanner(savedTasks);
+            while (readTasks.hasNextLine()) {
+                String line = readTasks.nextLine();
+                String[] tasks = line.split("\\|");
+//                System.out.println(tasks[0] + "." + tasks[1] + "." + tasks[2]);
+
+                if(tasks[0].contains("T")) { //todo case
+                    ToDo newTodo = new ToDo(tasks[2].substring(1));
+                    addTask(newTodo, listInputs);
+
+                } else if (tasks[0].contains("E")) { //event case
+                    String desc = tasks[2].split("/from")[0].substring(1);
+                    String from = tasks[2].split("/from")[1].split("/to")[0];
+                    String to = tasks[2].split("/to")[1];
+                    Event newEvent = new Event(desc, from, to);
+                    addTask(newEvent, listInputs);
+                } else if (tasks[0].contains("D")) { //deadline case
+                    String desc = tasks[2].split("/by")[0].substring(1);
+                    String by = tasks[2].split("/by")[1];
+                    Deadline newDead = new Deadline(desc, by);
+                    addTask(newDead, listInputs);
+                } else {
+                    System.out.println("valid task format please");
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Could not find the tasks.txt file.");
+            try {
+                File nf = new File("data/tasks.txt");
+                nf.createNewFile();
+                System.out.println("new file created at "+ nf.getAbsolutePath());
+            } catch (IOException e1) {
+                System.out.println("Error: Could not create new file.");
+            }
+        }
+
+
+        Scanner scanner = new Scanner(System.in); //scan for more inputs
+
 
         try {
             while (true) {
@@ -113,6 +174,7 @@ public class Goon {
                     }
                     ToDo newTodo = new ToDo(input.substring(5));
                     addTask(newTodo, listInputs);
+                    addTaskToFile(newTodo);
 
                 } else if (input.startsWith("event")) { //adding event
                     if(!descriptionCheck(input.length(),7, "Event")){
@@ -123,6 +185,7 @@ public class Goon {
                     String to = input.split("/to")[1];
                     Event newEvent = new Event(desc, from, to);
                     addTask(newEvent, listInputs);
+                    addTaskToFile(newEvent);
 
                 } else if (input.startsWith("deadline")) { //adding deadline
                     if(!descriptionCheck(input.length(),11, "Deadline")){
@@ -132,18 +195,16 @@ public class Goon {
                     String by = input.split("/by")[1];
                     Deadline newDead = new Deadline(desc, by);
                     addTask(newDead, listInputs);
+                    addTaskToFile(newDead);
+
                 } else if (input.startsWith("delete")) {
                     if(!markCheck(input.length(),8, "Delete")){ continue; }
                     int deleteIndex = input.charAt(7) - '0';
                     deleteTask(deleteIndex, listInputs);
 
                 } else {
-//                formattedPrint("added: "+ input);
-//                listInputs.add(new Task(input));
-//                counter++;
                     System.out.println("Gooner, you better wake up and enter a valid command >:-(");
                 }
-//                input = scanner.nextLine();
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Gooner, enter something within bounds idiot.");

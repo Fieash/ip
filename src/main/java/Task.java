@@ -21,6 +21,14 @@ public class Task {
         return this;
     }
 
+    public String toFileFormat() {
+        String fileString = " | ";
+        if (isDone) {
+            return fileString + "1 | " + description;
+        }
+        return fileString + "0 | " + description;
+    }
+
     @Override
     public String toString() {
         return "["+ getStatusIcon() + "] " + description;
