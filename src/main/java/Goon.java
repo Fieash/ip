@@ -1,9 +1,13 @@
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Goon {
     public static void formattedPrint(String input) {
@@ -69,6 +73,18 @@ public class Goon {
         //todo
     }
 
+    public static LocalDate parseDate(String input) {
+        try {
+            String date = input.replaceAll("\\s+","");
+            return LocalDate.parse(date);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("date not in correct format");
+            e.printStackTrace();
+        }
+        return LocalDate.parse("1111-11-11");
+    }
+
     public static void main(String[] args) {
         System.out.println(
                 "  ________                    __________        __   \n" +
@@ -108,7 +124,8 @@ public class Goon {
                 } else if (tasks[0].contains("D")) { //deadline case
                     String desc = tasks[2].split("/by")[0].substring(1);
                     String by = tasks[2].split("/by")[1];
-                    Deadline newDead = new Deadline(desc, by);
+                    LocalDate parsedDate = parseDate(by);
+                    Deadline newDead = new Deadline(desc, parsedDate);
                     addTask(newDead, listInputs);
                 } else {
                     System.out.println("valid task format please");
@@ -193,7 +210,8 @@ public class Goon {
                     }
                     String desc = input.split("/by")[0].substring(9);
                     String by = input.split("/by")[1];
-                    Deadline newDead = new Deadline(desc, by);
+                    LocalDate parsedDate = parseDate(by);
+                    Deadline newDead = new Deadline(desc, parsedDate);
                     addTask(newDead, listInputs);
                     addTaskToFile(newDead);
 
