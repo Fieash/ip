@@ -1,5 +1,7 @@
 T | 1 | read book
-D | 0 | return book /by June 6th
+D | 0 | return book /by 2021-06-06
+D | 1 | submit assignment /by 2025-06-01
 E | 0 | project meeting /from Aug 6th 2pm /to 4pm
 T | 1 | join sports club
-T | 0 | asdfasdl;kj
+T | 0 | asdfasdlkj
+D | 1 | another asn /by 2026-08-02
