@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return "\nD" + super.toFileFormat();
+        return "\nD" + super.toFileFormat() + "/by " + by;
     }
 
     @Override
