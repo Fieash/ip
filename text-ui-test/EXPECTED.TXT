@@ -12,28 +12,28 @@ ____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
 		[T][ ] borrow book
-	Now you have 1 tasks in the list.
+	Now you have 1 goon.tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
-	Here are the tasks in your list:
+	Here are the goon.tasks in your list:
 	1.[T][ ] borrow book
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
 		[D][ ] return book (by: sunday)
-	Now you have 2 tasks in the list.
+	Now you have 2 goon.tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
 	Got it. I've added this task:
 		[E][ ] project meeting (from: mon 2pm , to: ntsure 4pm)
-	Now you have 3 tasks in the list.
+	Now you have 3 goon.tasks in the list.
 	____________________________________________________________
 
 	____________________________________________________________
-	Here are the tasks in your list:
+	Here are the goon.tasks in your list:
 	1.[T][ ] borrow book
 	2.[D][ ] return book (by: sunday)
 	3.[E][ ] project meeting (from: mon 2pm , to: ntsure 4pm)
@@ -50,7 +50,7 @@ ____________________________________________________________
 	____________________________________________________________
 
 	____________________________________________________________
-	Here are the tasks in your list:
+	Here are the goon.tasks in your list:
 	1.[T][ ] borrow book
 	2.[D][X] return book (by: sunday)
 	3.[E][X] project meeting (from: mon 2pm , to: ntsure 4pm)
@@ -62,7 +62,7 @@ ____________________________________________________________
 	____________________________________________________________
 
 	____________________________________________________________
-	Here are the tasks in your list:
+	Here are the goon.tasks in your list:
 	1.[T][ ] borrow book
 	2.[D][ ] return book (by: sunday)
 	3.[E][X] project meeting (from: mon 2pm , to: ntsure 4pm)

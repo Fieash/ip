@@ -1,4 +1,4 @@
-# Goon User Guide
+# goon.Goon User Guide
 
 // Update the title above to match the actual product name
 

@@ -1,3 +1,5 @@
+package goon;
+
 public class GoonException extends Exception {
     public GoonException() {}
 
