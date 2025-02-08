@@ -2,15 +2,20 @@ package goon;
 
 import goon.tasks.*;
 
+/**
+ * Entrypoint into the Goon program
+ */
 public class Goon {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-
+    /**
+     * Runs the Goon program
+     * @param args Arguments - Unused
+     */
     public static void main(String[] args) {
-
         TaskList taskList = new TaskList();
         Storage storage = new Storage("data/tasks.txt");
         try{
@@ -20,7 +25,5 @@ public class Goon {
         }
         Ui ui = new Ui();
         ui.run(taskList, storage);
-
-
     }
 }
