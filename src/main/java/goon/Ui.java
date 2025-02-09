@@ -7,7 +7,6 @@ import goon.tasks.TaskList;
 import goon.tasks.ToDo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // handle the IO of the program
@@ -118,7 +117,8 @@ public class Ui {
                     String from = input.split("/from")[1].split("/to")[0];
                     String to = input.split("/to")[1];
                     Event newEvent = new Event(desc, from, to);
-
+                    taskList.addTask(newEvent);
+                    TaskList.addTaskToFile(newEvent);
 
                 } else if (input.startsWith("deadline")) { //adding deadline
                     if(!descriptionCheck(input.length(),11, "Tasks.Deadline")){

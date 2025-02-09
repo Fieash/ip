@@ -79,9 +79,9 @@ public class Storage {
         } catch(FileNotFoundException e) {
             System.out.println("File not found, trying to create now");
             try {
-                File nf = new File("data/goon.tasks.txt");
-                nf.createNewFile();
-                System.out.println("new file created at " + nf.getAbsolutePath());
+                File newFile = new File("data/goon.tasks.txt");
+                newFile.createNewFile();
+                System.out.println("new file created at " + newFile.getAbsolutePath());
             } catch (IOException e1) {
                 throw new GoonException("Error: Could not create tasks.txt file");
             }

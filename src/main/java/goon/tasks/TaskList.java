@@ -55,9 +55,9 @@ public class TaskList {
 
     public static void addTaskToFile(Task newTask) throws GoonException {
         try {
-            FileWriter fw = new FileWriter("data/tasks.txt", true);
-            fw.append(newTask.toFileFormat());
-            fw.close();
+            FileWriter fileWriter = new FileWriter("data/tasks.txt", true);
+            fileWriter.append(newTask.toFileFormat());
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println("G00n3r, an error occured while writing to the file.");
             throw new GoonException("at addTaskToFile");
