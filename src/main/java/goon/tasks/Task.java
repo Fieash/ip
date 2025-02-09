@@ -31,6 +31,14 @@ public class Task {
     }
 
     /**
+     * Gets the description of the Task object
+     * @return String description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Unmarks the task as done
      * @return Task after it has been unmarked
      */

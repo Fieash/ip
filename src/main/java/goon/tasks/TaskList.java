@@ -103,7 +103,6 @@ public class TaskList {
      * Lists all the tasks in the tasks ArrayList
      */
     public void listTasks() {
-        printDivider("\tHere are the tasks in your list:");
         int printCounter = 1;
         for (Task t : tasks) {
             System.out.println("\t" + printCounter + "." + t);
