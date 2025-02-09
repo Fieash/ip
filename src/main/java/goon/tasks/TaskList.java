@@ -76,6 +76,22 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the file storage
+     * @param newTask task to be added to the file
+     * @throws GoonException when we are unable to write to the file
+     */
+    public static void addTaskToFile(Task newTask) throws GoonException {
+        try {
+            FileWriter fileWriter = new FileWriter("data/tasks.txt", true);
+            fileWriter.append(newTask.toFileFormat());
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("G00n3r, an error occured while writing to the file.");
+            throw new GoonException("at addTaskToFile");
+        }
+    }
+
+    /**
      * Prints a standard 60 char long '_' divider, append input behind
      * @param input to append on the nextline of the divider
      */
