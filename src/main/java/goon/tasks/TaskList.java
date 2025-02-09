@@ -15,28 +15,50 @@ import java.util.ArrayList;
 public class TaskList {
     public ArrayList<Task> tasks;
 
-    // init task list with empty arraylist
+    /**
+     * Creates the TaskList object and initializes the empty ArrayList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns the size of the tasks ArrayList
+     * @return int size of the tasks ArrayList
+     */
     public int size() {
         return this.tasks.size();
     }
 
-    // clear the task list
+    /**
+     * Clears all the Tasks in tasks ArrayList
+     */
     public void clear() {
         this.tasks.clear();
     }
 
+    /**
+     * Updates the Task in the tasks ArrayList by the index
+     * @param index of the ArrayList to update
+     * @param task updated Task object to replace in the ArrayList
+     */
     public void set(int index, Task task) {
         this.tasks.set(index, task);
     }
 
+    /**
+     * Gets the task at a specified index
+     * @param index of task to get
+     * @return Task that is present at the specified index
+     */
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
+    /**
+     * Adds a new task to the tasks ArrayList
+     * @param newTask Task object to add to end of tasks ArrayList
+     */
     public void addTask(Task newTask) {
         printDivider("\tGot it. I've added this task:\n\t\t" + newTask.toString());
         this.tasks.add(newTask);
@@ -53,22 +75,17 @@ public class TaskList {
         printDivider("");
     }
 
-    public static void addTaskToFile(Task newTask) throws GoonException {
-        try {
-            FileWriter fw = new FileWriter("data/tasks.txt", true);
-            fw.append(newTask.toFileFormat());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("G00n3r, an error occured while writing to the file.");
-            throw new GoonException("at addTaskToFile");
-        }
-    }
-
+    /**
+     * Prints a standard 60 char long '_' divider, append input behind
+     * @param input to append on the nextline of the divider
+     */
     public static void printDivider(String input) {
         System.out.println("\t____________________________________________________________\n" +input);
     }
 
-    //list all tasks
+    /**
+     * Lists all the tasks in the tasks ArrayList
+     */
     public void listTasks() {
         printDivider("\tHere are the tasks in your list:");
         int printCounter = 1;

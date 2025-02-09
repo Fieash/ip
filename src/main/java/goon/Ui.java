@@ -7,15 +7,20 @@ import goon.tasks.TaskList;
 import goon.tasks.ToDo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-// handle the IO of the program
+/**
+ * Handles the main IO operations of the program
+ * Main command loop is here
+ */
 public class Ui {
     public Ui(){
 
     }
 
+    /**
+     * Displays the introduction message
+     */
     public void displayIntro() {
         System.out.println(
             "  ________                    __________        __   \n" +
@@ -30,7 +35,12 @@ public class Ui {
             "____________________________________________________________\n");
     }
 
-
+    /**
+     * Checks if the task can be marked
+     * @param actual length
+     * @param minimum length required
+     * @return boolean of whether the task has been successfully marked
+     */
     public static boolean markCheck(int actual, int minimum) {
         if (actual < minimum) {
             printDivider("Gooner, marking or unmarking of a task needs a number.");
@@ -40,6 +50,13 @@ public class Ui {
         return true;
     }
 
+    /**
+     * Checks if there is a valid description for the Task
+     * @param actual length of description
+     * @param minimum length of description required
+     * @param taskType of task being checked
+     * @return boolean on whether the task has a valid description
+     */
     public static boolean descriptionCheck(int actual, int minimum, String taskType) {
         if (actual < minimum) {
             printDivider("Gooner, description of a " + taskType + " needs to have something how else would you identify the damn task???????");
@@ -49,10 +66,19 @@ public class Ui {
         return true;
     }
 
+    /**
+     * Displays all tasks in the TaskList
+     * @param taskList array to read from
+     */
     public void displayAllTasks(TaskList taskList) {
         taskList.listTasks();
     }
 
+    /**
+     * Parses the string input into a LocalDate format
+     * @param input string to parse as a date
+     * @return LocalDate representation of the string input
+     */
     public static LocalDate parseDate(String input) {
         try {
             String date = input.replaceAll("\\s+","");
@@ -65,6 +91,11 @@ public class Ui {
         return LocalDate.parse("1111-11-11");
     }
 
+    /**
+     * Executes the main loop of the program
+     * @param taskList array that will be used
+     * @param storage object that will handle writing to file
+     */
     public void run (TaskList taskList, Storage storage){
         displayIntro();
 
@@ -108,7 +139,7 @@ public class Ui {
                     }
                     ToDo newTodo = new ToDo(input.substring(5));
                     taskList.addTask(newTodo);
-                    TaskList.addTaskToFile(newTodo);
+                    storage.addTaskToFile(newTodo);
 
                 } else if (input.startsWith("event")) { //adding event
                     if(!descriptionCheck(input.length(),7, "Tasks.Event")){
@@ -118,7 +149,8 @@ public class Ui {
                     String from = input.split("/from")[1].split("/to")[0];
                     String to = input.split("/to")[1];
                     Event newEvent = new Event(desc, from, to);
-
+                    taskList.addTask(newEvent);
+                    storage.addTaskToFile(newEvent);
 
                 } else if (input.startsWith("deadline")) { //adding deadline
                     if(!descriptionCheck(input.length(),11, "Tasks.Deadline")){
@@ -129,7 +161,7 @@ public class Ui {
                     LocalDate parsedDate = parseDate(by);
                     Deadline newDeadline = new Deadline(desc, parsedDate);
                     taskList.addTask(newDeadline);
-                    TaskList.addTaskToFile(newDeadline);
+                    storage.addTaskToFile(newDeadline);
 
                 } else if (input.startsWith("delete")) {
                     if(!markCheck(input.length(),8)){ continue; }
@@ -147,7 +179,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Standard length divider to be printed
+     * @param input string to the appended to the end of the divider
+     */
     public static void printDivider(String input) {
-        System.out.println("\t____________________________________________________________\n" +input);
+        System.out.println("\t____________________________________________________________\n" + input);
     }
 }

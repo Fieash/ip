@@ -13,24 +13,40 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Handles storage of tasks
+ */
 public class Storage {
-    public String filePath;
+    private final String filePath;
 
+    /**
+     * Creates the Storage Object.
+     * @param filepath File Path to load from and save to
+     */
     public Storage(String filepath) {
         this.filePath = filepath;
     }
 
-    //add the task to goon.tasks.txt file
-    public void addTaskToFile(Task newTask) {
+    /**
+     * Creates the Storage Object. Sets the file path to load from and save to
+     * @param newTask object to be added to the file
+     */
+    public void addTaskToFile(Task newTask) throws GoonException {
         try {
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(this.filePath, true);
             fw.append(newTask.toFileFormat());
             fw.close();
         } catch (IOException e) {
             System.out.println("G00n3r, an error occured while writing to the file.");
+            throw new GoonException("at addTaskToFile");
         }
     }
 
+    /**
+     * parse the user input into a LocalDate
+     * @param input string representation of the date
+     * @return LocalDate representation of the user's input
+     */
     public static LocalDate parseDate(String input) {
         try {
             String date = input.replaceAll("\\s+","");
@@ -43,7 +59,11 @@ public class Storage {
         return LocalDate.parse("1111-11-11");
     }
 
-    //load the file into the tasklist
+    /**
+     * Loads the list of tasks from the file storage into the ArrayList
+     * @param taskList to populate with the tasks found in storage
+     * @throws GoonException if there are issues reading from the file
+     */
     public void load(TaskList taskList) throws GoonException {
         File savedTasks = new File(filePath);
         Scanner readTasks = null;
