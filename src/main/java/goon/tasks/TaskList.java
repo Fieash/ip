@@ -56,6 +56,21 @@ public class TaskList {
     }
 
     /**
+     * Finds Tasks in the tasks ArrayList which contains the user's input
+     * @param findString the string of the user's input to search for
+     */
+    public void findTask(String findString) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if(task.description.contains(findString)) {
+                foundTasks.tasks.add(task);
+            }
+        }
+        printDivider("\tHere are the matching tasks in your list for \"" + findString + "\":");
+        foundTasks.listTasks();
+    }
+
+    /**
      * Adds a new task to the tasks ArrayList
      * @param newTask Task object to add to end of tasks ArrayList
      */
@@ -66,6 +81,10 @@ public class TaskList {
         printDivider("");
     }
 
+    /**
+     * Deletes the task from the tasks ArrayList
+     * @param taskIndex index of the task to delete
+     */
     public void deleteTask(int taskIndex) {
         printDivider("\tNoted. I've removed this task:");
         Task taskToDelete = this.getTask(taskIndex - 1);
