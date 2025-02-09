@@ -50,6 +50,7 @@ public class Ui {
     }
 
     public void displayAllTasks(TaskList taskList) {
+        printDivider("\tHere are the tasks in your list:");
         taskList.listTasks();
     }
 
@@ -103,7 +104,7 @@ public class Ui {
                     printDivider("");
 
                 } else if (input.startsWith("todo")) { //adding "Tasks.ToDo" task
-                    if(!descriptionCheck(input.length(),6, "Tasks.ToDo")){
+                    if(!descriptionCheck(input.length(),6, "ToDo")){
                         continue;
                     }
                     ToDo newTodo = new ToDo(input.substring(5));
@@ -111,7 +112,7 @@ public class Ui {
                     TaskList.addTaskToFile(newTodo);
 
                 } else if (input.startsWith("event")) { //adding event
-                    if(!descriptionCheck(input.length(),7, "Tasks.Event")){
+                    if(!descriptionCheck(input.length(),7, "Event")){
                         continue;
                     }
                     String desc = input.split("/from")[0].substring(6);
@@ -121,7 +122,7 @@ public class Ui {
 
 
                 } else if (input.startsWith("deadline")) { //adding deadline
-                    if(!descriptionCheck(input.length(),11, "Tasks.Deadline")){
+                    if(!descriptionCheck(input.length(),11, "Deadline")){
                         continue;
                     }
                     String desc = input.split("/by")[0].substring(9);
@@ -135,6 +136,13 @@ public class Ui {
                     if(!markCheck(input.length(),8)){ continue; }
                     int deleteIndex = input.charAt(7) - '0';
                     taskList.deleteTask(deleteIndex);
+
+                } else if (input.startsWith("find")) {
+                    if(!descriptionCheck(input.length(),6, "Find")){
+                        continue;
+                    }
+                    String findString = input.split(" ")[1];
+                    taskList.findTask(findString);
 
                 } else {
                     System.out.println("Gooner, you better wake up and enter a valid command >:-(");

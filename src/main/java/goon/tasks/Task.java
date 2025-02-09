@@ -18,6 +18,14 @@ public class Task {
         return this;
     }
 
+    /**
+     * Gets the description of the Task object
+     * @return String description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
     public Task unmarkAsDone() {
         isDone = false;
         return this;

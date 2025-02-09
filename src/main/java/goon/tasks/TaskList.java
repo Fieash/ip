@@ -37,6 +37,17 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+    public void findTask(String findString) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if(task.description.contains(findString)) {
+                foundTasks.tasks.add(task);
+            }
+        }
+        printDivider("\tHere are the matching tasks in your list for \"" + findString + "\":");
+        foundTasks.listTasks();
+    }
+
     public void addTask(Task newTask) {
         printDivider("\tGot it. I've added this task:\n\t\t" + newTask.toString());
         this.tasks.add(newTask);
@@ -70,7 +81,6 @@ public class TaskList {
 
     //list all tasks
     public void listTasks() {
-        printDivider("\tHere are the tasks in your list:");
         int printCounter = 1;
         for (Task t : tasks) {
             System.out.println("\t" + printCounter + "." + t);
