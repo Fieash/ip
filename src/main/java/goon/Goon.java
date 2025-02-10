@@ -1,6 +1,6 @@
 package goon;
 
-import goon.tasks.*;
+import goon.tasks.TaskList;
 
 /**
  * Entrypoint into the Goon program
@@ -25,5 +25,12 @@ public class Goon {
         }
         Ui ui = new Ui();
         ui.run(taskList, storage);
+    }
+
+    /**
+     * Generates a response for the user's chat message
+     */
+    public String getResponse(String input) {
+        return "Goon heard: " + input;
     }
 }
