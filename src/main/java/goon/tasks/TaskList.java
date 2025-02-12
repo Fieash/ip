@@ -59,7 +59,7 @@ public class TaskList {
      * Finds Tasks in the tasks ArrayList which contains the user's input
      * @param findString the string of the user's input to search for
      */
-    public void findTask(String findString) {
+    public String findTask(String findString) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {
             if(task.description.contains(findString)) {
@@ -68,30 +68,33 @@ public class TaskList {
         }
         printDivider("\tHere are the matching tasks in your list for \"" + findString + "\":");
         foundTasks.listTasks();
+        return "\tHere are the matching tasks in your list for \"" + findString + "\":" + foundTasks.listTasks();
     }
 
     /**
      * Adds a new task to the tasks ArrayList
      * @param newTask Task object to add to end of tasks ArrayList
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         printDivider("\tGot it. I've added this task:\n\t\t" + newTask.toString());
         this.tasks.add(newTask);
         System.out.println("\tNow you have " + this.size() + " tasks in the list.");
         printDivider("");
+        return "\tGot it. I've added this task:\n\t\t" + newTask.toString() + "\n\tNow you have " + this.size() + " tasks in the list.";
     }
 
     /**
      * Deletes the task from the tasks ArrayList
      * @param taskIndex index of the task to delete
      */
-    public void deleteTask(int taskIndex) {
+    public String deleteTask(int taskIndex) {
         printDivider("\tNoted. I've removed this task:");
         Task taskToDelete = this.getTask(taskIndex - 1);
         this.tasks.remove(taskIndex - 1);
         System.out.println("\t" + taskToDelete.toString());
         System.out.println("\tNow you have " + this.size() + "tasks in the list.");
         printDivider("");
+        return "\tNoted. I've removed this task:" + taskToDelete.toString() + this.size() + "tasks in the list.";
     }
 
     /**
@@ -121,13 +124,16 @@ public class TaskList {
     /**
      * Lists all the tasks in the tasks ArrayList
      */
-    public void listTasks() {
+    public String listTasks() {
+        String output = "";
         int printCounter = 1;
         for (Task t : tasks) {
             System.out.println("\t" + printCounter + "." + t);
+            output += "\n" + printCounter + "." + t;
             printCounter++;
         }
         printDivider("");
+        return output;
     }
 
 }
