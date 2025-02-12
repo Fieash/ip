@@ -23,8 +23,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Goon");
-            stage.setMinWidth(300);
-            stage.setMinHeight(400);
+            stage.setMinWidth(500);
+            stage.setMinHeight(600);
             fxmlLoader.<MainWindow>getController().setDuke(goon);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {

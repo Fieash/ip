@@ -28,9 +28,19 @@ public class Goon {
     }
 
     /**
-     * Generates a response for the user's chat message
+     * Generates a response for the user's chat message by calling the GoonBot
+     * @param input the input string of the user
      */
     public String getResponse(String input) {
-        return "Goon heard: " + input;
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage("data/tasks.txt");
+        try{
+            storage.load(taskList);
+        } catch (GoonException goonException) {
+            System.out.println(goonException.getMessage());
+        }
+        Ui ui = new Ui();
+
+        return ui.processInput(input, taskList, storage);
     }
 }
