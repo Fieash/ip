@@ -42,6 +42,7 @@ public class Ui {
      * @return boolean of whether the task has been successfully marked
      */
     public static boolean markCheck(int actual, int minimum) {
+        assert actual >= minimum : "length of actual=" + actual + " should be >= " + "length of minimum=" +minimum;
         if (actual < minimum) {
             printDivider("Gooner, marking or unmarking of a task needs a number.");
             printDivider("");
@@ -58,6 +59,9 @@ public class Ui {
      * @return boolean on whether the task has a valid description
      */
     public static boolean descriptionCheck(int actual, int minimum, String taskType) {
+        assert actual >= minimum : "length of actual=" + actual + " should be >= " + "length of minimum=" +minimum;
+        assert taskType != null : "taskType is null";
+        assert actual >= minimum : actual + " should be >= " + minimum;
         if (actual < minimum) {
             printDivider("Gooner, description of a " + taskType + " needs to have something how else would you identify the damn task???????");
             printDivider("");
@@ -74,7 +78,6 @@ public class Ui {
         printDivider("\tHere are the tasks in your list:");
         taskList.listTasks();
         return "Here are the tasks in your list:" + taskList.listTasks();
-
     }
 
     /**
