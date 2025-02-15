@@ -1,10 +1,6 @@
 package goon;
 
-import goon.tasks.Deadline;
-import goon.tasks.Event;
-import goon.tasks.Task;
-import goon.tasks.TaskList;
-import goon.tasks.ToDo;
+import goon.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -94,7 +90,12 @@ public class Storage {
                     LocalDate parsedDate = parseDate(by);
                     Deadline newDeadline = new Deadline(desc, parsedDate);
                     taskList.addTask(newDeadline);
-
+                } else if (tasks[0].contains("C")) {
+                    String desc = tasks[2].split("/name")[0].substring(1);
+                    String name = tasks[2].split("/name")[1].split("/phone")[0].substring(1);
+                    String phone = tasks[2].split("/phone")[1].substring(1);
+                    Contact newContact = new Contact(desc, name, phone);
+                    taskList.addTask(newContact);
                 } else {
                     System.out.println("valid task format please");
                 }

@@ -22,7 +22,7 @@ public class Event extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "\nE" + super.toFileFormat();
+        return "\nE" + super.toFileFormat() + "/from" + from + "/to" + to;
     }
 
     /**

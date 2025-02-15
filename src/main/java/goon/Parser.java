@@ -107,6 +107,22 @@ public class Parser {
                 String findString = input.split(" ")[1];
                 taskList.findTask(findString);
                 return output;
+            case "contact":
+                if(!Ui.descriptionCheck(input.length(),9, "Contact")){
+                    return "please enter a valid description for contact";
+                }
+                String contactDescription = input.split("/name")[0].substring(8);
+                String name = input.split("/name")[1].split("/phone")[0];
+                String phone = input.split("/phone")[1];
+                Contact newContact = new Contact(contactDescription, name, phone);
+                output += taskList.addTask(newContact);
+                try {
+                    storage.addTaskToFile(newContact);
+                }catch (GoonException e) {
+                    output += "\t" + e.getMessage(); //gracefully catch inability to addTaskToFile()
+                }
+                return output;
+
             default:
                 System.out.println("Gooner, you better wake up and enter a valid command >:-(");
                 return "Gooner, you better wake up and enter a valid command >:-(";
