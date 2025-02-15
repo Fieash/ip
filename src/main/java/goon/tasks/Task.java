@@ -35,7 +35,7 @@ public class Task {
      * Unmarks the task as done
      * @return Task after it has been unmarked
      */
-    public Task unmarkAsDone() {
+    public Task unmark() {
         isDone = false;
         return this;
     }
