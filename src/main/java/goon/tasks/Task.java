@@ -11,6 +11,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        assert description != null : "Task description is null";
     }
 
     /**
@@ -28,14 +29,6 @@ public class Task {
     public Task markAsDone() {
         isDone = true;
         return this;
-    }
-
-    /**
-     * Gets the description of the Task object
-     * @return String description of the task
-     */
-    public String getDescription() {
-        return description;
     }
 
     /**

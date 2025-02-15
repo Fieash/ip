@@ -24,6 +24,7 @@ public class Storage {
      * @param filepath File Path to load from and save to
      */
     public Storage(String filepath) {
+        assert filepath != null : "file path cannot be null!";
         this.filePath = filepath;
     }
 
@@ -32,6 +33,7 @@ public class Storage {
      * @param newTask object to be added to the file
      */
     public void addTaskToFile(Task newTask) throws GoonException {
+        assert newTask != null : "task cannot be null!";
         try {
             FileWriter fw = new FileWriter(this.filePath, true);
             fw.append(newTask.toFileFormat());
@@ -48,6 +50,7 @@ public class Storage {
      * @return LocalDate representation of the user's input
      */
     public static LocalDate parseDate(String input) {
+        assert input != null : "date input string cannot be null!";
         try {
             String date = input.replaceAll("\\s+","");
             return LocalDate.parse(date);
