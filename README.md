@@ -1,27 +1,64 @@
-# goon.Goon project template
+# GoonBot User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Overview
+Welcome to **GoonBot**! This simple chatbot helps fellow `G00n3rs`to track their tasks, classifiable into ToDos, Deadlines and Events. You may also track contacts here!
+## Installation
 
-## Setting up in Intellij
+### Prerequisites
+Ensure you have the following installed:
+- Java (JDK 17 or later)
+- JavaFX (if using a GUI version)
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+### Steps
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/fieash/ip.git
    ```
-   Hello from
-     ________                    __________        __   
-    /  _____/  ____   ____   ____\______   \ _____/  |_
-   /   \  ___ /  _ \ /  _ \ /    \|    |  _//  _ \   __\
-   \    \_\  (  <_> |  <_> )   |  \    |   (  <_> )  |  
-    \______  /\____/ \____/|___|  /______  /\____/|__|  
-           \/                   \/       \/
-   ```
+2. launch the project with IntelliJ
+   * Open the project into Intellij as follows:
+   * Click `Open`. 
+   * Select the project directory, and click `OK`. 
+   * If there are any further prompts, accept the defaults. 
+   * Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
+   * In the same dialog, set the **Project language level** field to the `SDK default` option.
+3. Run the Launcher class
+4. Use the GoonBot!
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+
+## Usage
+
+### CLI Version
+- To use the CLI version, run the `Main` class
+- Once the GoonBot is running, you can interact by typing commands into the terminal.
+
+**Example Commands:**
+- `bye` → Exits the chatbot.
+- `list` → Displays all tasks
+- `todo Buy groceries` → Adds a to-do item.
+- `event Meeting /from Monday /to Wednesday` → Adds an event.
+- `deadline Submit report /by 2025-02-20` → Adds a deadline.
+- `contact close friend /name john /phone 91271023` → Adds a contact.
+- `mark 1` → Marks Task 1 as done.
+- `unmark 1` → Unmarks Task 1.
+- `delete 1` → Deletes Task 1.
+
+### GUI Version (if applicable)
+If you're using the JavaFX GUI, simply type into the input box and press the Enter key to interact with GoonBot.
+
+## Features
+- Simple text-based interaction.
+- Task management (ToDo, Deadline, Event, Contacts).
+- Persistent storage of tasks.
+- JavaFX GUI support.
+
+## Troubleshooting
+- **Java not found?** Ensure Java is installed and added to your system PATH.
+- **GUI not launching?** Ensure JavaFX is installed and correctly configured.
+- **Command not recognized?** Try using `help` for a list of commands.
+
+## Contributing
+Feel free to fork the repository and submit pull requests for improvements.
+
+## License
+This project is licensed under the MIT License.
+
