@@ -75,6 +75,14 @@ public class Ui {
      */
     public static String displayAllTasks(TaskList taskList) {
         printDivider("\tHere are the tasks in your list:");
+        taskList.clear();
+        Storage storage = new Storage("data/tasks.txt");
+        try{
+            storage.load(taskList);
+        }catch (GoonException ge){
+            System.out.println(ge.getMessage());
+            return "error reading task list from displayAllTasks()";
+        }
         taskList.listTasks();
         return "Here are the tasks in your list:" + taskList.listTasks();
     }

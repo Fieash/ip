@@ -94,7 +94,7 @@ public class TaskList {
         System.out.println("\t" + taskToDelete.toString());
         System.out.println("\tNow you have " + this.size() + "tasks in the list.");
         printDivider("");
-        return "\tNoted. I've removed this task:" + taskToDelete.toString() + this.size() + "tasks in the list.";
+        return "\tNoted. I've removed this task:\n" + taskToDelete.toString() + this.size() + "tasks in the list.";
     }
 
     /**

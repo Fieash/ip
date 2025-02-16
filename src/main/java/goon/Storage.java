@@ -40,6 +40,20 @@ public class Storage {
         }
     }
 
+    public void storeTaskList(TaskList taskList) throws GoonException {
+        assert taskList != null : "taskList cannot be null!";
+        try {
+            FileWriter fw = new FileWriter(this.filePath, false); //overwrite
+            for(Task t: taskList.tasks){
+                fw.append(t.toFileFormat());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("G00n3r, an error occured while overwritng to the file.");
+            throw new GoonException("at storeTaskList");
+        }
+    }
+
     /**
      * parse the user input into a LocalDate
      * @param input string representation of the date
@@ -75,6 +89,9 @@ public class Storage {
 
                 if(tasks[0].contains("T")) { //todo case
                     ToDo newTodo = new ToDo(tasks[2].substring(1));
+                    if(tasks[1].contains("1")){
+                        newTodo.markAsDone();
+                    }
                     taskList.addTask(newTodo);
 
                 } else if (tasks[0].contains("E")) { //event case
@@ -82,6 +99,9 @@ public class Storage {
                     String from = tasks[2].split("/from")[1].split("/to")[0];
                     String to = tasks[2].split("/to")[1];
                     Event newEvent = new Event(desc, from, to);
+                    if(tasks[1].contains("1")){
+                        newEvent.markAsDone();
+                    }
                     taskList.addTask(newEvent);
 
                 } else if (tasks[0].contains("D")) { //deadline case
@@ -89,12 +109,18 @@ public class Storage {
                     String by = tasks[2].split("/by")[1];
                     LocalDate parsedDate = parseDate(by);
                     Deadline newDeadline = new Deadline(desc, parsedDate);
+                    if(tasks[1].contains("1")){
+                        newDeadline.markAsDone();
+                    }
                     taskList.addTask(newDeadline);
                 } else if (tasks[0].contains("C")) {
                     String desc = tasks[2].split("/name")[0].substring(1);
-                    String name = tasks[2].split("/name")[1].split("/phone")[0].substring(1);
-                    String phone = tasks[2].split("/phone")[1].substring(1);
+                    String name = tasks[2].split("/name")[1].split("/phone")[0];
+                    String phone = tasks[2].split("/phone")[1];
                     Contact newContact = new Contact(desc, name, phone);
+                    if(tasks[1].contains("1")){
+                        newContact.markAsDone();
+                    }
                     taskList.addTask(newContact);
                 } else {
                     System.out.println("valid task format please");
