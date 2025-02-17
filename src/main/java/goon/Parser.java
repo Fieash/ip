@@ -86,7 +86,7 @@ public class Parser {
             case "list":
                 return Ui.displayAllTasks(taskList);
             case "mark":
-                if(!Ui.markCheck(input.length(), 5)) {
+                if (!Ui.markCheck(input.length(), 5)) {
                     return "\tPlease enter a valid task to mark";
                 }
                 int mark = input.charAt(5) - '0';
@@ -98,7 +98,7 @@ public class Parser {
                 return output;
 
             case "unmark":
-                if(!Ui.markCheck(input.length(), 6)) {
+                if (!Ui.markCheck(input.length(), 6)) {
                     return "\tPlease enter a valid task to unmark";
                 }
                 int unmark = input.charAt(7) - '0';
@@ -110,7 +110,7 @@ public class Parser {
                 return output;
 
             case "todo":
-                if(!Ui.descriptionCheck(input.length(),6, "ToDo")){
+                if (!Ui.descriptionCheck(input.length(), 6, "ToDo")) {
                     return "please enter a valid description for todo";
                 }
                 ToDo newTodo = new ToDo(input.substring(5));
@@ -123,7 +123,7 @@ public class Parser {
                 return output;
 
             case "event":
-                if(!Ui.descriptionCheck(input.length(),7, "Event")){
+                if (!Ui.descriptionCheck(input.length(), 7, "Event")) {
                     return "please enter a valid description for event";
                 }
                 String eventDescription = input.split("/from")[0].substring(6);
@@ -139,7 +139,7 @@ public class Parser {
                 return output;
 
             case "deadline":
-                if(!Ui.descriptionCheck(input.length(),11, "Deadline")){
+                if (!Ui.descriptionCheck(input.length(), 11, "Deadline")) {
                     return "please enter a valid description for deadline";
                 }
                 String deadlineDescription = input.split("/by")[0].substring(9);
@@ -155,7 +155,7 @@ public class Parser {
                 return output;
 
             case "delete":
-                if(!Ui.markCheck(input.length(),8)){
+                if (!Ui.markCheck(input.length(), 8)) {
                     return "please enter a valid task to delete";
                 }
                 int deleteIndex = input.charAt(7) - '0';
@@ -163,7 +163,7 @@ public class Parser {
                 return output;
 
             case "find":
-                if(!Ui.descriptionCheck(input.length(),6, "Find")){
+                if (!Ui.descriptionCheck(input.length(), 6, "Find")) {
                     return "please enter a valid description for find";
                 }
                 String findString = input.split(" ")[1];
@@ -171,7 +171,7 @@ public class Parser {
                 return output;
 
             case "contact":
-                if(!Ui.descriptionCheck(input.length(),9, "Contact")){
+                if (!Ui.descriptionCheck(input.length(), 9, "Contact")) {
                     return "please enter a valid description for contact";
                 }
                 String contactDescription = input.split("/name")[0].substring(8);

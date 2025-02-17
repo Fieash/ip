@@ -14,8 +14,7 @@ import java.util.Scanner;
  * Main command loop is here
  */
 public class Ui {
-    public Ui(){
-
+    public Ui() {
     }
 
     /**
@@ -23,15 +22,15 @@ public class Ui {
      */
     public static String displayIntro() {
         return(
-            "  ________                    __________        __   \n" +
-            " /  _____/  ____   ____   ____\\______   \\ _____/  |_ \n" +
-            "/   \\  ___ /  _ \\ /  _ \\ /    \\|    |  _//  _ \\   __\\\n" +
-            "\\    \\_\\  (  <_> |  <_> )   |  \\    |   (  <_> )  |  \n" +
-            " \\______  /\\____/ \\____/|___|  /______  /\\____/|__|  \n" +
-            "        \\/                   \\/       \\/              \n" +
-            "____________________________________________________________\n" +
-            "Ayyyy boss whats da plan?\n" +
-            "____________________________________________________________\n");
+            "  ________                    __________        __   \n"
+            + " /  _____/  ____   ____   ____\\______   \\ _____/  |_ \n"
+            + "/   \\  ___ /  _ \\ /  _ \\ /    \\|    |  _//  _ \\   __\\\n"
+            + "\\    \\_\\  (  <_> |  <_> )   |  \\    |   (  <_> )  |  \n"
+            + " \\______  /\\____/ \\____/|___|  /______  /\\____/|__|  \n"
+            + "        \\/                   \\/       \\/              \n"
+            + "____________________________________________________________\n"
+            + "Ayyyy boss whats da plan?\n"
+            + "____________________________________________________________\n");
     }
 
     /**
@@ -41,7 +40,7 @@ public class Ui {
      * @return boolean of whether the task has been successfully marked
      */
     public static boolean markCheck(int actual, int minimum) {
-        assert actual >= minimum : "length of actual=" + actual + " should be >= " + "length of minimum=" +minimum;
+        assert actual >= minimum : "length of actual=" + actual + " should be >= " + "length of minimum=" + minimum;
         if (actual < minimum) {
             printDivider("Gooner, marking or unmarking of a task needs a number.");
             printDivider("");
@@ -58,7 +57,8 @@ public class Ui {
      * @return boolean on whether the task has a valid description
      */
     public static boolean descriptionCheck(int actual, int minimum, String taskType) {
-        assert actual >= minimum : "length of actual=" + actual + " should be >= " + "length of minimum=" +minimum;
+        assert actual >= minimum : "length of actual=" + actual + " should be >= "
+                + "length of minimum=" + minimum;
         assert taskType != null : "taskType is null";
         assert actual >= minimum : actual + " should be >= " + minimum;
         if (actual < minimum) {
@@ -77,9 +77,9 @@ public class Ui {
         printDivider("\tHere are the tasks in your list:");
         taskList.clear();
         Storage storage = new Storage("data/tasks.txt");
-        try{
+        try {
             storage.load(taskList);
-        }catch (GoonException ge){
+        } catch (GoonException ge) {
             System.out.println(ge.getMessage());
             return "error reading task list from displayAllTasks()";
         }
@@ -124,14 +124,14 @@ public class Ui {
      * @param taskList array that will be used
      * @param storage object that will handle writing to file
      */
-    public void run (TaskList taskList, Storage storage){
+    public void run(TaskList taskList, Storage storage) {
         System.out.println(displayIntro());
 
         try {
             while (true) {
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
-                if (input.equalsIgnoreCase("bye")){
+                if (input.equalsIgnoreCase("bye")) {
                     printDivider("\tBye. Hope to see you again soon!");
                     printDivider("");
                     System.exit(0);
@@ -140,7 +140,7 @@ public class Ui {
                     displayAllTasks(taskList);
 
                 } else if (input.startsWith("mark")) { //marking tasks
-                    if(!markCheck(input.length(), 5)) {
+                    if (!markCheck(input.length(), 5)) {
                         continue;
                     }
                     int mark = input.charAt(5) - '0';
@@ -151,7 +151,7 @@ public class Ui {
                     printDivider("");
 
                 } else if (input.startsWith("unmark")) { //unmarking tasks
-                    if(!markCheck(input.length(), 6)) {
+                    if (!markCheck(input.length(), 6)) {
                         continue;
                     }
                     int unmark = input.charAt(7) - '0';
@@ -162,7 +162,7 @@ public class Ui {
                     printDivider("");
 
                 } else if (input.startsWith("todo")) { //adding "Tasks.ToDo" task
-                    if(!descriptionCheck(input.length(),6, "ToDo")){
+                    if (!descriptionCheck(input.length(), 6, "ToDo")) {
                         continue;
                     }
                     ToDo newTodo = new ToDo(input.substring(5));
@@ -170,7 +170,7 @@ public class Ui {
                     storage.addTaskToFile(newTodo);
 
                 } else if (input.startsWith("event")) { //adding event
-                    if(!descriptionCheck(input.length(),7, "Event")){
+                    if (!descriptionCheck(input.length(), 7, "Event")) {
                         continue;
                     }
                     String desc = input.split("/from")[0].substring(6);
@@ -181,7 +181,7 @@ public class Ui {
                     storage.addTaskToFile(newEvent);
 
                 } else if (input.startsWith("deadline")) { //adding deadline
-                    if(!descriptionCheck(input.length(),11, "Deadline")){
+                    if (!descriptionCheck(input.length(), 11, "Deadline")) {
                         continue;
                     }
                     String desc = input.split("/by")[0].substring(9);
@@ -192,12 +192,14 @@ public class Ui {
                     storage.addTaskToFile(newDeadline);
 
                 } else if (input.startsWith("delete")) {
-                    if(!markCheck(input.length(),8)){ continue; }
+                    if (!markCheck(input.length(), 8)) {
+                        continue;
+                    }
                     int deleteIndex = input.charAt(7) - '0';
                     taskList.deleteTask(deleteIndex);
 
                 } else if (input.startsWith("find")) {
-                    if(!descriptionCheck(input.length(),6, "Find")){
+                    if (!descriptionCheck(input.length(), 6, "Find")) {
                         continue;
                     }
                     String findString = input.split(" ")[1];

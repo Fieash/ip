@@ -1,11 +1,6 @@
 package goon.tasks;
 
 import goon.GoonException;
-import goon.tasks.Deadline;
-import goon.tasks.Event;
-import goon.tasks.Task;
-import goon.tasks.TaskList;
-import goon.tasks.ToDo;
 import goon.Ui;
 
 import java.io.FileWriter;
@@ -62,7 +57,7 @@ public class TaskList {
     public String findTask(String findString) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {
-            if(task.description.contains(findString)) {
+            if (task.description.contains(findString)) {
                 foundTasks.tasks.add(task);
             }
         }

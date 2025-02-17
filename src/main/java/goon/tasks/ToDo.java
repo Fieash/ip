@@ -5,7 +5,7 @@ public class ToDo extends Task{
      * Creates ToDo
      * @param description of the Todo object
      */
-    public ToDo(String description){
+    public ToDo(String description) {
         super(description);
     }
 

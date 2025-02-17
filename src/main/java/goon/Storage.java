@@ -44,7 +44,7 @@ public class Storage {
         assert taskList != null : "taskList cannot be null!";
         try {
             FileWriter fw = new FileWriter(this.filePath, false); //overwrite
-            for(Task t: taskList.tasks){
+            for(Task t: taskList.tasks) {
                 fw.append(t.toFileFormat());
             }
             fw.close();
@@ -87,9 +87,9 @@ public class Storage {
                 String[] tasks = line.split("\\|");
                 //System.out.println(goon.tasks[0] + "." + goon.tasks[1] + "." + goon.tasks[2]);
 
-                if(tasks[0].contains("T")) { //todo case
+                if (tasks[0].contains("T")) { //todo case
                     ToDo newTodo = new ToDo(tasks[2].substring(1));
-                    if(tasks[1].contains("1")){
+                    if (tasks[1].contains("1")) {
                         newTodo.markAsDone();
                     }
                     taskList.addTask(newTodo);
@@ -99,7 +99,7 @@ public class Storage {
                     String from = tasks[2].split("/from")[1].split("/to")[0];
                     String to = tasks[2].split("/to")[1];
                     Event newEvent = new Event(desc, from, to);
-                    if(tasks[1].contains("1")){
+                    if (tasks[1].contains("1")) {
                         newEvent.markAsDone();
                     }
                     taskList.addTask(newEvent);
@@ -109,7 +109,7 @@ public class Storage {
                     String by = tasks[2].split("/by")[1];
                     LocalDate parsedDate = parseDate(by);
                     Deadline newDeadline = new Deadline(desc, parsedDate);
-                    if(tasks[1].contains("1")){
+                    if (tasks[1].contains("1")) {
                         newDeadline.markAsDone();
                     }
                     taskList.addTask(newDeadline);
@@ -118,7 +118,7 @@ public class Storage {
                     String name = tasks[2].split("/name")[1].split("/phone")[0];
                     String phone = tasks[2].split("/phone")[1];
                     Contact newContact = new Contact(desc, name, phone);
-                    if(tasks[1].contains("1")){
+                    if (tasks[1].contains("1")) {
                         newContact.markAsDone();
                     }
                     taskList.addTask(newContact);

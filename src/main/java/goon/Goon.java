@@ -18,7 +18,7 @@ public class Goon {
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
         Storage storage = new Storage("data/tasks.txt");
-        try{
+        try {
             storage.load(taskList);
         } catch (GoonException goonException) {
             System.out.println(goonException.getMessage());
@@ -34,7 +34,7 @@ public class Goon {
     public String getResponse(String input) {
         TaskList taskList = new TaskList();
         Storage storage = new Storage("data/tasks.txt");
-        try{
+        try {
             storage.load(taskList);
         } catch (GoonException goonException) {
             System.out.println(goonException.getMessage());
