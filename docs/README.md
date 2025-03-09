@@ -75,7 +75,6 @@ If you're using the JavaFX GUI, simply type into the input box and press the Ent
 ## Troubleshooting
 - **Java not found?** Ensure Java is installed and added to your system PATH.
 - **GUI not launching?** Ensure JavaFX is installed and correctly configured.
-- **Command not recognized?** Try using `help` for a list of commands.
 
 ## Contributing
 Feel free to fork the repository and submit pull requests for improvements.
