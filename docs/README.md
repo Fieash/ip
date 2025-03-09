@@ -53,6 +53,25 @@ If you're using the JavaFX GUI, simply type into the input box and press the Ent
 - Persistent storage of tasks.
 - JavaFX GUI support.
 
+
+---
+
+## **Commands**
+
+| **Command** | **Description**                                  | **Format**                                                | **Example**                                |
+|------------|--------------------------------------------------|-----------------------------------------------------------|--------------------------------------------|
+| `bye`      | Exits the application.                           | `bye`                                                     | `bye`                                      |
+| `list`     | Lists all tasks in your current task list.       | `list`                                                    | `list`                                     |
+| `todo`     | Adds a ToDo task.                                | `todo <description>`                                      | `todo Buy groceries`                       |
+| `event`    | Adds an Event task.                              | `event <description> /from <time> /to <time>`             | `event Meeting /from Monday /to Wednesday` |
+| `deadline` | Adds a Deadline task.                            | `deadline <description> /by <date>`                       | `deadline Submit report /by 2025-02-20`    |
+| `deadline` | Adds a Deadline task.                            | `contact <description> /name <name> /phone <phone number>` | `contact close friend /name john /phone 91271023`    |
+| `mark`     | Marks a task as done.                            | `mark <task number>`                                      | `mark 1`                                   |
+| `unmark`    | Marks a task as UNdone.                           | `unmark <task number>`                                    | `unmark 1`                                 |
+| `delete`   | Deletes a task from the list.                    | `delete <task number>`                                    | `delete 1`                                 |
+                          |
+
+
 ## Troubleshooting
 - **Java not found?** Ensure Java is installed and added to your system PATH.
 - **GUI not launching?** Ensure JavaFX is installed and correctly configured.
