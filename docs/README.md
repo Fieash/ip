@@ -29,6 +29,15 @@ Ensure you have the following installed:
 
 ## Usage
 
+### Create a `tasks.txt` file first
+create a task.txt data store in a `data` folder
+```bash
+mkdir data
+cd data
+cat > tasks.txt
+```
+enjoy the goonbot
+
 ### CLI Version
 - To use the CLI version, run the `Main` class
 - Once the GoonBot is running, you can interact by typing commands into the terminal.
@@ -46,6 +55,23 @@ Ensure you have the following installed:
 
 ### GUI Version (if applicable)
 If you're using the JavaFX GUI, simply type into the input box and press the Enter key to interact with GoonBot.
+
+---
+
+## **Commands**
+
+| **Command**     | **Description**                                                                                        | **Format**                          | **Example**                        |
+|----------------|------------------------------------------------------------------------------------------------------|-------------------------------------|-------------------------------------|
+| `list`         | Lists all tasks in your current task list.                                                           | `list`                              | `list`                        |
+| `mark`         | Marks a task as done.                                                                                | `done <task number>`                | `mark 1`                      |
+| `unmark`         | Marks a task as UNdone.                                                                                | `done <task number>`                | `unmark 1`                      |
+| `delete`       | Deletes a task from the list.                                                                        | `delete <task number>`              | `delete 2`                    |
+| `todo`         | Adds a ToDo task.                                                                                    | `todo <description>`                | `todo Buy groceries`          |
+| `deadline`     | Adds a Deadline task.                                                                                | `deadline <description> /by <date>` | `deadline Submit report /by 2025-02-20` |
+| `event`        | Adds an Event task.                                                                                  | `event <description> /at <time>`    | `event Meeting /from Monday /to Wednesday` |
+| `contact`        | Adds a Contact.                                                                                  | `contact <description> /name <name> /phone <phone number>`    | `contact close friend /name john /phone 91271023` |
+| `bye`          | Exits the application.                                                                               | `bye`                               | `bye`                         |
+
 
 ## Features
 - Simple text-based interaction.
